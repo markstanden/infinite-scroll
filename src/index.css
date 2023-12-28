@@ -1,0 +1,19 @@
+html {
+  font-family: "Noto Sans", sans-serif;
+}
+
+html * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main {
+  display: contents;
+}

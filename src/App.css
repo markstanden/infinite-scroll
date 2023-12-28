@@ -1,0 +1,10 @@
+header h1 {
+  margin-bottom: 20px;
+  font-family: sans-serif;
+  font-weight: 300;
+  font-size: 84px;
+  padding: 1rem 3rem;
+  margin: 2rem;
+  border: 2px dotted;
+  border-radius: 10px;
+}
