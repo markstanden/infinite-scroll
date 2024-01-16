@@ -1,4 +1,7 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/25c1d64e-bd93-473c-b70a-c658459fa630/deploy-status)](https://app.netlify.com/sites/anchorman-scroller/deploys)
+
 # Infinite Scroll
+Deployed on netlify [here](https://anchorman-scroller.netlify.app/)
 
 - A (simple) mini-project to develop a clean infinite scroller in React.
 - I wanted to practice functional programming practices in a real world situation.
