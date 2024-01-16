@@ -42,7 +42,7 @@ function createRequestString(apiSettings: ApiSettings, page: number){
  */
 function createUpdatedConfig(settingsObject: ApiSettings, newPage: number): ApiSettings {
     const clonedSettings = {...settingsObject};
-    clonedSettings.params.offset = newPage;
+    clonedSettings.params.offset = newPage * clonedSettings.params.limit;
     return clonedSettings;
 }
 
