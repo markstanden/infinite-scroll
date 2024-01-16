@@ -22,6 +22,7 @@ interface CardData {
     id: string,
 }
 
+type TupleKeyValuePair = [key: string, value: string|number];
 type CardGetter = (number) => Promise<GiphyResponse>;
 
 type BundleType = "messaging_non_clips" | "clips_grid_picker" | "sticker_layering" | "low_bandwidth";

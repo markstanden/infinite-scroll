@@ -58,11 +58,6 @@ function addOptions(apiOptions: ApiPageParams): string {
         .join("&");
 }
 
-/**
- * @typedef {string} key - tuple key
- * @typedef {string|number} value - tuple value
- * @typedef {[key, value]} TupleKeyValuePair
- */
 
 /**
  * Function to produce a single key value pair for the request param
