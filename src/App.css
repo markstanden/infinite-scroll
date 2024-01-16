@@ -1,5 +1,4 @@
-header h1,
-button {
+header h1{
   border: 2px dotted;
   border-radius: 0.5rem;
   font-family: sans-serif;
@@ -7,8 +6,4 @@ button {
   font-weight: 200;
   margin: 3rem;
   padding: 1rem 3rem;
-}
-
-button {
-  font-size: 3rem;
 }
