@@ -4,12 +4,22 @@ import {getData} from "./getData";
 import {convertData} from "./convertData.ts";
 import {apiConfig} from "./apiConfig.ts";
 import {useEffect, useState} from "react";
-
-const getPage = getData(apiConfig);
+import {getScrollPosition} from "./getScrollPosition.ts";
+import {getGridHeight} from "./getGridHeight.ts";
 
 function App() {
+
+    const getPage = getData(apiConfig);
+    const INFINITE_SCROLL_OFFSET = import.meta.env.VITE_INFINITE_SCROLL_OFFSET ?? 500;
+    
     const [page, setPage] = useState<number>(0);
     const [pageData, setPageData] = useState<CardData[]>([]);
+    const scrollPos = getScrollPosition();
+    const gridHeight = getGridHeight();
+
+    useEffect(() => {
+        if (gridHeight - scrollPos < INFINITE_SCROLL_OFFSET) {setPage(page + 1);}
+    }, [scrollPos]);
 
     useEffect(() => {
         async function updateData(page: number): Promise<void> {
@@ -27,9 +37,6 @@ function App() {
         <main>
             <Cards data={pageData}/>
         </main>
-        <button onClick={() => {setPage(page+1)}}>
-            GIVE ME MORE
-        </button>
     </>)
 }
 
