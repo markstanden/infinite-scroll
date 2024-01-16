@@ -1,16 +1,29 @@
-# Scroll
+# Infinite Scroll
 
-## Primary Learning Objectives
+- A (simple) mini-project to develop a clean infinite scroller in React.
+- I wanted to practice functional programming practices in a real world situation.
+- More practice with promises and async/await.
 
-- Create clean paginated API requests
-- Implement Infinite scroll
+## Primary Objectives
 
-## Secondary Learning Objectives
+- [x] Create clean paginated API requests
+- [x] Implement Infinite scroll
+
+## Secondary Objectives
 
 - Basic security
-  - Use of dotenv and vite to shield API Key for low value API key
+  - [x] Use of dotenv and vite to shield API Key for low value API key
 - Functional Programming in JS
-  - single responsibility functions
-  - use of pure functions and composition where possible
+  - [x] single responsibility functions
+  - [x] use of pure functions and composition where possible
 - CSS grid collage of videos
   - CSS grid and its uses interests me.
+
+## Other
+
+- React
+  - More functional components
+  - Custom hooks
+  - useState/useEffect
+
+- Asynchronous JavaScript
