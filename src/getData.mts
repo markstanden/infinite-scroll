@@ -1,23 +1,22 @@
 /**
  * Returns a function that makes the fetch request to the API
  * with the API settings held in closure and parses the response as JSON
+ * @param {Fetcher} fetcher the function to retrieve the posts
  * @param {ApiSettings} apiSettings The API Config Object
  * @return {CardGetter}
  */
-function getData(apiSettings: ApiSettings): CardGetter {
+function getData(fetcher: Fetcher, apiSettings: ApiSettings): CardGetter {
     /**
      * Function that returns a promise of the API search results
      * @param {number} page - The page offset to return
      * @return {Promise<GiphyResponse>}
      */
-    async function getJSONResponse(page: number = 0): Promise<GiphyResponse> {
-        const response = await fetch(
+    return async function getJSONResponse(page: number = 0): Promise<GiphyResponse> {
+        const response = await fetcher(
             createRequestString(apiSettings, page)
         );
         return response.json();
     }
-
-    return getJSONResponse;
 }
 
 /**

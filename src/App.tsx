@@ -1,16 +1,16 @@
 import './App.css'
 import {useEffect, useState} from "react";
 
-import {apiConfig} from "./apiConfig.ts";
+import {apiConfig} from "./apiConfig.mts";
 import {Cards} from "./Cards/Cards.tsx";
-import {convertData} from "./convertData.ts";
-import {getData} from "./getData";
-import {getGridHeight} from "./getGridHeight.ts";
-import {getScrollPosition} from "./getScrollPosition.ts";
+import {convertData} from "./convertData.mts";
+import {getData} from "./getData.mts";
+import {getGridHeight} from "./getGridHeight.mts";
+import {getScrollPosition} from "./getScrollPosition.mts";
 
 function App() {
 
-    const getPage = getData(apiConfig);
+    const getPage = getData(fetch, apiConfig);
     const INFINITE_SCROLL_OFFSET = import.meta.env.VITE_INFINITE_SCROLL_OFFSET ?? 500;
     
     const [page, setPage] = useState<number>(0);
