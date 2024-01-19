@@ -1,3 +1,11 @@
+
+function getMoreGiphy(url:string) {
+    return async function(pageNumber:number):Promise<GiphyResponse> {
+        const res = await fetch(`${url}/${pageNumber}`);
+        return res.json();
+    }
+}
+
 /**
  * Returns a function that makes the fetch request to the API
  * with the API settings held in closure and parses the response as JSON
@@ -41,7 +49,7 @@ function createRequestString(apiSettings: ApiSettings, page: number){
  */
 function createUpdatedConfig(settingsObject: ApiSettings, newPage: number): ApiSettings {
     const clonedSettings = {...settingsObject};
-    clonedSettings.params.offset = newPage * clonedSettings.params.limit;
+    clonedSettings.params.offset = newPage;
     return clonedSettings;
 }
 
@@ -68,4 +76,4 @@ function addOption([key, value=""]:[string, string | number]): string {
 }
 
 
-export {getData};
+export {getData, getMoreGiphy};

@@ -1,14 +1,17 @@
-const apiConfig: ApiSettings = {
-    baseURL: import.meta.env.VITE_GIPHY_BASE_URL,
-    params: {
-        api_key: import.meta.env.VITE_GIPHY_API_KEY,
-        bundle: "clips_grid_picker",
-        lang: "en",
-        limit: 25,
-        offset: 0,
-        q: import.meta.env.VITE_GIPHY_SEARCH_TERM,
-        rating: "g",
+function getApiConfig(baseURL: string, apiKey: string, searchTerm: string): ApiSettings {
+    return {
+        baseURL: baseURL,
+        params: {
+            api_key: apiKey,
+            bundle: "clips_grid_picker",
+            lang: "en",
+            limit: 25,
+            offset: 0,
+            q: searchTerm,
+            rating: "g",
+        }
     }
-};
+}
 
-export {apiConfig}
+
+export {getApiConfig}
