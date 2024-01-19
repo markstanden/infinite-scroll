@@ -1,21 +1,17 @@
-function debouncer(delay:number) {
+function debouncer(delay: number) {
     let timeout: NodeJS.Timeout;
     let lastArgs: any;
 
-    return (fn: (...args:any[])=>any) => {
-        console.log("timeout reset ")
-        clearTimeout(timeout);
-
+    return (fn: (...args: any[]) => any) => {
         return (...args: any[]) => {
-            console.log("timeout started")
-            timeout = setTimeout(() => {
-                if (args !== lastArgs) {
-                    console.log("fn called")
+            if (args !== lastArgs) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
                     fn(args);
-                }
-            }, delay);
+                }, delay);
+            }
         };
     };
 }
 
-export {debouncer}
+export { debouncer };

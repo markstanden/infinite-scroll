@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from 'react';
 
 export function getScrollPosition() {
     const [scrollPosition, setScrollPosition] = useState<number>(0);
@@ -8,8 +8,8 @@ export function getScrollPosition() {
             setScrollPosition(window.scrollY);
         }
 
-        document.addEventListener("scroll", updateCurrentState);
-        return () => document.removeEventListener("scroll", updateCurrentState);
+        document.addEventListener('scroll', updateCurrentState);
+        return () => document.removeEventListener('scroll', updateCurrentState);
     }, []);
     return scrollPosition;
 }

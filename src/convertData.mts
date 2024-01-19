@@ -3,7 +3,7 @@
  * @return {CardData}
  */
 function convertData(response: GiphyResponse): CardData[] {
-    return response.data.map(item => ({
+    return response.data.map((item) => ({
         src: item.images.original.mp4,
         name: item.title,
         link: item.images.original.mp4,
@@ -11,4 +11,4 @@ function convertData(response: GiphyResponse): CardData[] {
     }));
 }
 
-export {convertData}
+export { convertData };
