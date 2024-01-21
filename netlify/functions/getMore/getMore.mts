@@ -13,13 +13,15 @@ export default async (
     const apiKey = Netlify.env.get('VITE_GIPHY_API_KEY');
     const query = Netlify.env.get('VITE_GIPHY_SEARCH_TERM');
 
-    if (false && baseURL && apiKey && query) {
+    if (baseURL && apiKey && query) {
         const getPage = getData(fetch, getApiConfig(baseURL, apiKey, query));
         const data = await getPage(page);
         return new Response(JSON.stringify(data));
     }
 
-    return new Response(`${baseURL} ${apiKey} ${query}`);
+    return new Response(
+        `Server setup invalid: BaseURL:${baseURL}, Query: ${query}`
+    );
 };
 
 export const config: Config = {
