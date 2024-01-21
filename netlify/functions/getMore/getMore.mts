@@ -15,7 +15,7 @@ export default async (
         Netlify.env.get('VITE_GIPHY_SEARCH_TERM')
     );
 
-    if (config.params.apiKey) {
+    if (config.params.api_key) {
         const getPage = getData(fetch, config);
         const data = await getPage(page);
         return new Response(JSON.stringify(data));
