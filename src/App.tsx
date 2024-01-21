@@ -1,44 +1,47 @@
-import './App.css'
-import {useEffect, useState} from "react";
+import './App.css';
+import { useEffect, useState } from 'react';
 
-import {apiConfig} from "./apiConfig.ts";
-import {Cards} from "./Cards/Cards.tsx";
-import {convertData} from "./convertData.ts";
-import {getData} from "./getData";
-import {getGridHeight} from "./getGridHeight.ts";
-import {getScrollPosition} from "./getScrollPosition.ts";
+import { Cards } from './Cards/Cards.tsx';
+import { convertData } from './convertData.mts';
+import { getMoreGiphy } from './getData.mts';
+import { getGridHeight } from './getGridHeight.mts';
+import { getScrollPosition } from './getScrollPosition.mts';
+import { debouncer } from './debouncer.mjs';
+
+const debouncedPager = debouncer(100);
 
 function App() {
-
-    const getPage = getData(apiConfig);
-    const INFINITE_SCROLL_OFFSET = import.meta.env.VITE_INFINITE_SCROLL_OFFSET ?? 500;
-    
-    const [page, setPage] = useState<number>(0);
+    const INFINITE_SCROLL_OFFSET =
+        import.meta.env.VITE_INFINITE_SCROLL_OFFSET ?? 2000;
     const [pageData, setPageData] = useState<CardData[]>([]);
     const scrollPos = getScrollPosition();
     const gridHeight = getGridHeight();
+    const getPage = debouncedPager(updateData);
+
+    async function updateData(offset: number): Promise<void> {
+        const newPageData = convertData(
+            await getMoreGiphy('/get-more')(offset)
+        );
+        setPageData([...pageData, ...newPageData]);
+    }
 
     useEffect(() => {
-        if (gridHeight - scrollPos < INFINITE_SCROLL_OFFSET) {setPage(page + 1);}
+        console.log(gridHeight - scrollPos);
+        if (gridHeight - scrollPos < INFINITE_SCROLL_OFFSET) {
+            getPage(pageData.length);
+        }
     }, [scrollPos]);
 
-    useEffect(() => {
-        async function updateData(page: number): Promise<void> {
-            const newPageData = convertData(await getPage(page));
-            setPageData([...pageData, ...newPageData])
-        }
-
-        updateData(page);
-    }, [page]);
-
-    return (<>
-        <header>
-            <h1>I don't know how to put this</h1>
-        </header>
-        <main>
-            <Cards data={pageData}/>
-        </main>
-    </>)
+    return (
+        <>
+            <header>
+                <h1>I don't know how to put this</h1>
+            </header>
+            <main>
+                <Cards data={pageData} />
+            </main>
+        </>
+    );
 }
 
-export default App
+export default App;

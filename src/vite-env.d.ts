@@ -1,5 +1,9 @@
 /// <reference types="vite/client" />
 
+type TupleKeyValuePair = [key: string, value: string|number];
+type Fetcher = (url:string) => Promise<Response>;
+type CardGetter = (number) => Promise<GiphyResponse>;
+
 interface ApiSettings {
     baseURL: string,
     params: ApiPageParams,
@@ -21,9 +25,6 @@ interface CardData {
     link: string,
     id: string,
 }
-
-type TupleKeyValuePair = [key: string, value: string|number];
-type CardGetter = (number) => Promise<GiphyResponse>;
 
 type BundleType = "messaging_non_clips" | "clips_grid_picker" | "sticker_layering" | "low_bandwidth";
 type Rating = "g" | "pg" | "pg-13" | "r";
