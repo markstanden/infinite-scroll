@@ -21,7 +21,9 @@ export default async (
         return new Response(JSON.stringify(data));
     }
 
-    return new Response(`Server setup invalid: config: ${config}`);
+    return new Response(
+        `Server setup invalid: config: ${JSON.stringify(config)}`
+    );
 };
 
 export const config: Config = {
