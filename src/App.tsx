@@ -9,16 +9,20 @@ import { getScrollPosition } from './getScrollPosition.mts';
 import { debouncer } from './debouncer.mjs';
 
 const debouncedPager = debouncer(100);
+const INFINITE_SCROLL_OFFSET =
+    import.meta.env.VITE_INFINITE_SCROLL_OFFSET ?? 2000;
+console.log('Offset set to: ', INFINITE_SCROLL_OFFSET);
 
 function App() {
-    const INFINITE_SCROLL_OFFSET =
-        import.meta.env.VITE_INFINITE_SCROLL_OFFSET ?? 2000;
     const [pageData, setPageData] = useState<CardData[]>([]);
     const scrollPos = getScrollPosition();
     const gridHeight = getGridHeight();
     const getPage = debouncedPager(updateData);
 
     async function updateData(offset: number): Promise<void> {
+        console.log(
+            `Currently displaying ${pageData.length} - Requesting more...`
+        );
         const newPageData = convertData(
             await getMoreGiphy('/get-more')(offset)
         );
@@ -26,7 +30,6 @@ function App() {
     }
 
     useEffect(() => {
-        console.log(gridHeight - scrollPos);
         if (gridHeight - scrollPos < INFINITE_SCROLL_OFFSET) {
             getPage(pageData.length);
         }
