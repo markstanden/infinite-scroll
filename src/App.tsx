@@ -31,6 +31,9 @@ function App() {
 
     useEffect(() => {
         if (gridHeight - scrollPos < INFINITE_SCROLL_OFFSET) {
+            console.log(
+                `Threshold passed (${gridHeight - scrollPos}) - Requesting more...`
+            );
             getPage(pageData.length);
         }
     }, [scrollPos]);
