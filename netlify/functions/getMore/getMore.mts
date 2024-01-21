@@ -9,19 +9,19 @@ export default async (
 ) => {
     const { page } = netlifyContextObject.params;
 
-    const baseURL = Netlify.env.get('VITE_GIPHY_BASE_URL');
-    const apiKey = Netlify.env.get('VITE_GIPHY_API_KEY');
-    const query = Netlify.env.get('VITE_GIPHY_SEARCH_TERM');
+    const config = getApiConfig(
+        Netlify.env.get('VITE_GIPHY_BASE_URL'),
+        Netlify.env.get('VITE_GIPHY_API_KEY'),
+        Netlify.env.get('VITE_GIPHY_SEARCH_TERM')
+    );
 
-    if (baseURL && apiKey && query) {
-        const getPage = getData(fetch, getApiConfig(baseURL, apiKey, query));
+    if (config.apiKey) {
+        const getPage = getData(fetch, config);
         const data = await getPage(page);
         return new Response(JSON.stringify(data));
     }
 
-    return new Response(
-        `Server setup invalid: BaseURL:${baseURL}, Query: ${query}`
-    );
+    return new Response(`Server setup invalid: config: ${config}`);
 };
 
 export const config: Config = {
