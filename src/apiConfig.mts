@@ -4,14 +4,14 @@ function getApiConfig(
     searchTerm: string
 ): ApiSettings {
     return {
-        baseURL: baseURL,
+        baseURL: baseURL ?? 'https://api.giphy.com/v1/gifs/search',
         params: {
             api_key: apiKey,
             bundle: 'clips_grid_picker',
             lang: 'en',
             limit: 25,
             offset: 0,
-            q: searchTerm,
+            q: searchTerm ?? 'anchorman',
             rating: 'g',
         },
     };
