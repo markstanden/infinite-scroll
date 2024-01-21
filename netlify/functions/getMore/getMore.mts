@@ -1,7 +1,7 @@
 import type { Config, Context } from '@netlify/functions';
 import { getData } from '../../../src/getData.mjs';
 import { getApiConfig } from '../../../src/apiConfig.mjs';
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 
 export default async (
     _incomingRequestObject: Request,
