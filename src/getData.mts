@@ -1,3 +1,5 @@
+import { addOptions } from './urlString/addOptions.ts';
+
 function getMoreGiphy(url: string) {
     return async function (pageNumber: number): Promise<GiphyResponse> {
         const res = await fetch(`${url}/${pageNumber}`);
@@ -33,7 +35,7 @@ function getData(fetcher: Fetcher, apiSettings: ApiSettings): CardGetter {
  * @return {string} the full request string with params.
  * @pure
  */
-function createRequestString(apiSettings: ApiSettings, page: number) {
+function createRequestString(apiSettings: ApiSettings, page: number): string {
     const settings = createUpdatedConfig(apiSettings, page);
     return [apiSettings.baseURL, addOptions(settings.params)].join('?');
 }
@@ -52,25 +54,6 @@ function createUpdatedConfig(
     const clonedSettings = { ...settingsObject };
     clonedSettings.params.offset = newPage;
     return clonedSettings;
-}
-
-/**
- * Returns url query string. - Creates a single request query string from
- * all key/value pair within the passed apiOptions
- * @param {ApiPageParams} apiOptions
- * @return {string} param
- */
-function addOptions(apiOptions: ApiPageParams): string {
-    return Object.entries(apiOptions).map(addOption).join('&');
-}
-
-/**
- * Function to produce a single key value pair for the request param
- * @param {TupleKeyValuePair} tuple
- * @returns {string} Single key/value pair expressed as a param query
- */
-function addOption([key, value = '']: [string, string | number]): string {
-    return `${key}=${value}`;
 }
 
 export { getData, getMoreGiphy };
