@@ -20,6 +20,8 @@
     "react/prop-types": 0,
     "react-refresh/only-export-components": "warn",
     "jsx-a11y/label-has-for": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "no-console": 1,
     "curly": [
       "error",
@@ -48,6 +50,7 @@
   "plugins": [
     "react",
     "react-refresh",
+    "react-hooks",
     "import",
     "jsx-a11y",
     "@typescript-eslint"
