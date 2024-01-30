@@ -11,6 +11,7 @@ import { debouncer } from './debouncer.mjs';
 const debouncedPager = debouncer(100);
 const INFINITE_SCROLL_OFFSET =
     import.meta.env.VITE_INFINITE_SCROLL_OFFSET ?? 3000;
+const TITLE = "I don't know how to put this";
 
 function App() {
     const [pageData, setPageData] = useState<CardData[]>([]);
@@ -29,12 +30,12 @@ function App() {
         if (gridHeight - scrollPos < INFINITE_SCROLL_OFFSET) {
             getPage(pageData.length);
         }
-    }, [scrollPos]);
+    }, [getPage, gridHeight, pageData, scrollPos]);
 
     return (
         <>
             <header>
-                <h1>I don't know how to put this</h1>
+                <h1>{TITLE}</h1>
             </header>
             <main>
                 <Cards data={pageData} />

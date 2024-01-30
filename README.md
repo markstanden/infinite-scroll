@@ -1,4 +1,5 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/25c1d64e-bd93-473c-b70a-c658459fa630/deploy-status)](https://app.netlify.com/sites/anchorman-scroller/deploys)
+[![CI/CD](https://github.com/markstanden/infinite-scroll/actions/workflows/run-tests.yml/badge.svg)](https://github.com/markstanden/infinite-scroll/actions/workflows/run-tests.yml)
 
 # Infinite Scroll
 Deployed on netlify [here](https://anchorman-scroller.netlify.app/)
