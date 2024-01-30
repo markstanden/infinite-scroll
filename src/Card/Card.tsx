@@ -4,6 +4,7 @@ function Card(props: { cardData: CardData }) {
     return (
         <article
             className={card.base}
+            data-testid={'card'}
             title={props.cardData.name}>
             <a href={props.cardData.link}>
                 <video
