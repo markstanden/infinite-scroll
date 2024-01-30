@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
-export function getGridHeight() {
+export function useGridHeight(selector: string) {
     const [gridHeight, setGridHeight] = useState<number>(0);
 
     useEffect(() => {
         function updateCurrentState() {
-            const cardsGrid = document.querySelector('#cards-grid');
+            const cardsGrid = document.querySelector(selector);
             if (cardsGrid) {
                 setGridHeight(cardsGrid.clientHeight);
             }

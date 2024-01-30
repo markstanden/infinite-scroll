@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function getScrollPosition() {
+export function useScrollPosition() {
     const [scrollPosition, setScrollPosition] = useState<number>(0);
 
     useEffect(() => {
