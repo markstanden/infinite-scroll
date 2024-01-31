@@ -1,4 +1,5 @@
 /**
+ * Adaptor to convert giphy response data into card data.
  * @param {GiphyResponse} response
  * @return {CardData}
  */

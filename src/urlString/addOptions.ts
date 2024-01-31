@@ -4,7 +4,7 @@
  * @param {ApiPageParams} apiOptions
  * @return {string} param
  */
-function addOptions(apiOptions: ApiPageParams): string {
+function addOptions(apiOptions: Record<string, string | number>): string {
     return Object.entries(apiOptions).map(addOption).join('&');
 }
 

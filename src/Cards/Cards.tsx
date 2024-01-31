@@ -1,12 +1,17 @@
 import cards from './Cards.module.css';
 import { Card } from '../Card/Card.tsx';
 
-function Cards(props: { data: CardData[] }) {
+interface cardsProps {
+    data: CardData[];
+}
+
+function Cards({ data }: cardsProps) {
     return (
         <section
             id="cards-grid"
-            className={cards.grid}>
-            {props.data.map((card, index) => {
+            className={cards.grid}
+            data-testid={'grid'}>
+            {data.map((card, index) => {
                 return (
                     <Card
                         key={index}
