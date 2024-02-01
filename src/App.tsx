@@ -8,7 +8,7 @@ import { useGridHeight } from './useGridHeight.mts';
 import { useScrollPosition } from './useScrollPosition.mts';
 import { debouncer } from './debouncer.mjs';
 
-const debouncedPager = debouncer(100);
+const debouncedPager = debouncer(300);
 const INFINITE_SCROLL_OFFSET =
     import.meta.env.VITE_INFINITE_SCROLL_OFFSET ?? 3000;
 const TITLE = "I don't know how to put this";
@@ -27,10 +27,11 @@ function App() {
     }
 
     useEffect(() => {
-        if (gridHeight - scrollPos < INFINITE_SCROLL_OFFSET) {
+        const distanceToBottom = gridHeight - scrollPos;
+        if (distanceToBottom < INFINITE_SCROLL_OFFSET) {
             getPage(pageData.length);
         }
-    }, [getPage, gridHeight, pageData, scrollPos]);
+    }, [scrollPos]);
 
     return (
         <>

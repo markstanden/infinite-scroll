@@ -13,11 +13,11 @@ const getMore = async (
     netlifyContextObject: Context,
     config = _config
 ) => {
-    const { page } = netlifyContextObject.params;
+    const { offset } = netlifyContextObject.params;
 
     if (config.params.api_key) {
-        const getPage = getData(fetch, config);
-        const data = await getPage(page);
+        const getFromOffset = getData(fetch, config);
+        const data = await getFromOffset(offset);
         return new Response(JSON.stringify(data));
     }
 

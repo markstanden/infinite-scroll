@@ -1,8 +1,8 @@
 import { addOptions } from './urlString/addOptions.ts';
 
 function getMoreGiphy(url: string) {
-    return async function (pageNumber: number): Promise<GiphyResponse> {
-        const res = await fetch(`${url}/${pageNumber}`);
+    return async function (offset: number): Promise<GiphyResponse> {
+        const res = await fetch(`${url}/${offset}`);
         return res.json();
     };
 }
@@ -17,43 +17,47 @@ function getMoreGiphy(url: string) {
 function getData(fetcher: Fetcher, apiSettings: ApiSettings): CardGetter {
     /**
      * Function that returns a promise of the API search results
-     * @param {number} page - The page offset to return
+     * @param {number} offset - The page offset to return
      * @return {Promise<GiphyResponse>}
      */
     return async function getJSONResponse(
-        page: number = 0
+        offset: number = 0
     ): Promise<GiphyResponse> {
-        const response = await fetcher(createRequestString(apiSettings, page));
+        const config = updateConfig(apiSettings)(offset);
+        const paramString = addOptions(config.params);
+        const requestString = formRequestString(config.baseURL)(paramString);
+
+        const response = await fetcher(requestString);
         return response.json();
     };
 }
 
 /**
- * Creates the request string from the api setting object.
- * @param {ApiSettings} apiSettings The API config object
- * @param {number} page - The page number of the paginated results to request
- * @return {string} the full request string with params.
+ * Returns a function that creates the request string from the curried base url and the provided query string
+ * @param {string} baseUrl The base URL for the request
+ * @return {(query: string) => string}
  * @pure
  */
-function createRequestString(apiSettings: ApiSettings, page: number): string {
-    const settings = createUpdatedConfig(apiSettings, page);
-    return [apiSettings.baseURL, addOptions(settings.params)].join('?');
+function formRequestString(baseUrl: string): (query: string) => string {
+    return function (query: string) {
+        return [baseUrl, query].join('?');
+    };
 }
 
 /**
- * Returns a new Api Settings object with a new page number
+ * Returns a function that returns new Api Settings object with a new starting offset number
  * @param {ApiSettings} settingsObject
- * @param {number} newPage
- * @returns {ApiSettings} A cloned API Settings object with an updated page number.
+ * @returns {(offest:number)=>ApiSettings} A function that returns a cloned API Settings object with updated offset.
  * @pure
  */
-function createUpdatedConfig(
-    settingsObject: ApiSettings,
-    newPage: number
-): ApiSettings {
-    const clonedSettings = { ...settingsObject };
-    clonedSettings.params.offset = newPage;
-    return clonedSettings;
+function updateConfig(
+    settingsObject: ApiSettings
+): (offset: number) => ApiSettings {
+    return function updateOffset(offset: number): ApiSettings {
+        const clonedSettings = { ...settingsObject };
+        clonedSettings.params.offset = offset;
+        return clonedSettings;
+    };
 }
 
 export { getData, getMoreGiphy };
